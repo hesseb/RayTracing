@@ -7,6 +7,7 @@ FLAGS:= #-O3
 
 SRCS:=$(wildcard src/*.cpp)
 HEADERS:=$(wildcard src/*.h)
+IMAGES:=$(wildcard img/*.ppm)
 OBJECTS:=$(patsubst src/%.cpp,bin/%.o,$(SRCS))
 
 
@@ -25,7 +26,7 @@ bin/%.o: src/%.cpp $(HEADERS)
 	$(CPP) $< $(FLAGS) -c -o $@ $(LDFLAGS) $(CPPVER) 
 
 clean:
-	rm -f bin/$(OBJECTS) bin/$(MAIN)
+	rm -f bin/$(OBJECTS) bin/$(MAIN) $(IMAGES)
 
 run:
-	./bin/$(MAIN)
+	./bin/$(MAIN) > img/image.ppm
