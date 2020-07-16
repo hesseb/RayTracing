@@ -1,5 +1,6 @@
 bin/*
 *.ppm
+*.vs
 
 # Prerequisites
 *.d

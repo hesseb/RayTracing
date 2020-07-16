@@ -11,8 +11,12 @@ IMAGES:=$(wildcard img/*.ppm)
 OBJECTS:=$(patsubst src/%.cpp,bin/%.o,$(SRCS))
 
 
-.PHONY: all run clean
-all: bin/$(MAIN)
+.PHONY: all
+all: build run
+
+
+
+build: bin/$(MAIN)
 
 # $< are the names of all prerequisites (the object files)
 # $@ is the name of the target (bin/myprogram in this case)
