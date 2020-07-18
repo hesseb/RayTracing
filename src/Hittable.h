@@ -1,4 +1,5 @@
-#pragma once
+#ifndef HITTABLE_H
+#define HITTABLE_H
 
 #include "Ray.h"
 #include "Vec3.h"
@@ -22,3 +23,5 @@ class Hittable
 public:
     virtual bool hit(const Ray& r, double tMin, double tMax, HitRecord& rec) const = 0;
 };
+
+#endif

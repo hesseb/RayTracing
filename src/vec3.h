@@ -1,5 +1,7 @@
-#pragma once
+#ifndef VEC3_H
+#define VEC3_H
 
+#include "Core.h"
 #include <cmath>
 #include <iostream>
 
@@ -48,6 +50,16 @@ public:
     double lengthSquared() const
     {
         return m_E[0]*m_E[0] + m_E[1]*m_E[1] + m_E[2]*m_E[2];
+    }
+
+    inline static Vec3 random()
+    {
+        return Vec3(randomDouble(), randomDouble(), randomDouble());
+    }
+
+    inline static Vec3 random(double min, double max)
+    {
+        return Vec3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
     }
 
 public:
@@ -108,3 +120,15 @@ inline Vec3 unitVector(Vec3 v)
 {
     return v / v.length();
 }
+
+inline Vec3 randomInUnitSphere()
+{
+    while (true)
+    {
+        Vec3 p = Vec3::random(-1, 1);
+        if (p.lengthSquared() < 1) return p;
+    }
+}
+
+
+#endif

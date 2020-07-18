@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SPHERE_H
+#define SPHERE_H
 
 #include "Hittable.h"
 #include "Vec3.h"
@@ -19,3 +20,5 @@ private:
     Point3 m_Center;
     double m_Radius;
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef HITTABLELIST_H
+#define HITTABLELIST_H
 
 #include "Hittable.h"
 
@@ -19,3 +20,5 @@ public:
 private:
     std::vector<std::shared_ptr<Hittable>> objects;
 };
+
+#endif

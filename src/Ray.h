@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RAY_H
+#define RAY_H
 
 #include "Vec3.h"
 
@@ -21,3 +22,5 @@ private:
     Point3 m_Origin;
     Vec3 m_Direction;
 };
+
+#endif
