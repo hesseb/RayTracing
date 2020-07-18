@@ -8,18 +8,17 @@
 class Camera
 {
 public:
-    Camera();
+    Camera(Point3 lookFrom, Point3 lookAt, Vec3 viewUp, double vFOV, double aspectRatio, double aperture, double focusDist);
 
-    Ray getRay(double u, double v) const
-    {
-        return Ray(m_Origin, m_LowerLeftCorner + u*m_Horizontal + v*m_Vertical - m_Origin);
-    }
+    Ray getRay(double s, double t) const;
 
 private:
     Point3 m_Origin;
     Point3 m_LowerLeftCorner;
     Vec3 m_Horizontal;
     Vec3 m_Vertical;
+    Vec3  m_U, m_V, m_W;
+    double m_LensRadius;
 };
 
 #endif

@@ -18,6 +18,7 @@ bool Sphere::hit(const Ray& r, double tMin, double tMax, HitRecord& record) cons
             record.p = r.at(record.t);
             Vec3 outwardNormal = (record.p - m_Center) / m_Radius;
             record.setFaceNormal(r, outwardNormal);
+            record.matPtr = m_MatPtr;
             return true;
         }
         temp = (-halfB + root) / a;
@@ -27,6 +28,7 @@ bool Sphere::hit(const Ray& r, double tMin, double tMax, HitRecord& record) cons
             record.p = r.at(record.t);
             Vec3 outwardNormal = (record.p - m_Center) / m_Radius;
             record.setFaceNormal(r, outwardNormal);
+            record.matPtr = m_MatPtr;
             return true;
         }
     }

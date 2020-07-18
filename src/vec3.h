@@ -62,6 +62,7 @@ public:
         return Vec3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
     }
 
+
 public:
     double m_E[3];
 };
@@ -121,14 +122,18 @@ inline Vec3 unitVector(Vec3 v)
     return v / v.length();
 }
 
-inline Vec3 randomInUnitSphere()
-{
-    while (true)
-    {
-        Vec3 p = Vec3::random(-1, 1);
-        if (p.lengthSquared() < 1) return p;
-    }
-}
+Vec3 randomInUnitSphere();
+
+Vec3 randomUnitVector();
+
+Vec3 randomInUnitDisc();
+
+Vec3 randomInHemisphere(const Vec3& normal);
+
+
+Vec3 reflect(const Vec3& v, const Vec3& normal);
+
+Vec3 refract(const Vec3& uv, const Vec3& normal, double etaFraction);
 
 
 #endif
