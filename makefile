@@ -3,7 +3,7 @@ CPP:=g++
 CPPVER:= -std=c++17
 
 LDFLAGS = -lm
-FLAGS:= #-O3
+FLAGS:= -O3
 
 SRCS:=$(wildcard src/*.cpp)
 HEADERS:=$(wildcard src/*.h)

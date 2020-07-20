@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "Core.h"
 #include "Material.h"
+#include "MovingSphere.h"
 
 #include <iostream>
 
@@ -48,7 +49,15 @@ HittableList randomScene()
             {
                 std::shared_ptr<Material> sphereMaterial;
 
-                if (chooseMat < 0.8)
+                if (chooseMat < 0.4)
+                {
+                    //Moving diffuse
+                    Color albedo = Color::random() * Color::random();
+                    sphereMaterial = std::make_shared<Lambertian>(albedo);
+                    Point3 center2 = center + Vec3(0, randomDouble(0, 0.5), 0);
+                    world.add(std::make_shared<MovingSphere>(center, center2, 0.0, 1.0, 0.2, sphereMaterial)); 
+                }
+                else if (chooseMat < 0.8)
                 {
                     //Diffuse
                     Color albedo = Color::random() * Color::random();
@@ -91,10 +100,10 @@ int main()
 {
     //Image
 
-    const double aspectRatio = 3.0 / 2.0;
-    const int imageWidth = 1200;
+    const double aspectRatio = 16.0 / 9.0;
+    const int imageWidth = 400;
     const int imageHeight = static_cast<int>(imageWidth / aspectRatio);
-    const int samplesPerPixel = 500;
+    const int samplesPerPixel = 100;
     const int maxDepth = 50;
 
     //World
@@ -126,7 +135,7 @@ int main()
     double distToFocus = 10.0; //(lookFrom - lookAt).length();
     double aperture = 0.1;
 
-    Camera camera(lookFrom, lookAt, viewUp, 20.0, aspectRatio, aperture, distToFocus);
+    Camera camera(lookFrom, lookAt, viewUp, 20.0, aspectRatio, aperture, distToFocus, 0.0, 1.0);
 
     //Render
 

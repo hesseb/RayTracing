@@ -23,9 +23,9 @@ public:
     
     Vec3& operator+=(const Vec3 &v)
     {
-        m_E[0] += v.m_E[0];
-        m_E[1] += v.m_E[1];
-        m_E[2] += v.m_E[2];
+        m_E[0] += v[0];
+        m_E[1] += v[1];
+        m_E[2] += v[2];
         return *this;
     }
 
@@ -62,8 +62,7 @@ public:
         return Vec3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
     }
 
-
-public:
+private:
     double m_E[3];
 };
 
@@ -72,27 +71,27 @@ using Color = Vec3;
 
 inline std::ostream& operator<<(std::ostream &out, const Vec3 &v)
 {
-    return out << v.m_E[0] << ' ' << v.m_E[1] << ' ' << v.m_E[2];
+    return out << v[0] << ' ' << v[1] << ' ' << v[2];
 }
 
 inline Vec3 operator+(const Vec3 &u, const Vec3 &v)
 {
-    return Vec3(u.m_E[0] + v.m_E[0], u.m_E[1] + v.m_E[1], u.m_E[2] + v.m_E[2]);
+    return Vec3(u[0] + v[0], u[1] + v[1], u[2] + v[2]);
 }
 
 inline Vec3 operator-(const Vec3 &u, const Vec3 &v)
 {
-    return Vec3(u.m_E[0] - v.m_E[0], u.m_E[1] - v.m_E[1], u.m_E[2] - v.m_E[2]);
+    return Vec3(u[0] - v[0], u[1] - v[1], u[2] - v[2]);
 }
 
 inline Vec3 operator*(const Vec3 &u, const Vec3 &v)
 {
-    return Vec3(u.m_E[0] * v.m_E[0], u.m_E[1] * v.m_E[1], u.m_E[2] * v.m_E[2]);
+    return Vec3(u[0] * v[0], u[1] * v[1], u[2] * v[2]);
 }
 
 inline Vec3 operator*(double t, const Vec3 &v)
 {
-    return Vec3(t * v.m_E[0], t * v.m_E[1], t * v.m_E[2]);
+    return Vec3(t * v[0], t * v[1], t * v[2]);
 }
 
 inline Vec3 operator*(const Vec3 &v, double t)
@@ -107,14 +106,14 @@ inline Vec3 operator/(const Vec3 &v, double t)
 
 inline double dot(const Vec3 &u, const Vec3 &v)
 {
-    return u.m_E[0] * v.m_E[0] + u.m_E[1] * v.m_E[1] + u.m_E[2] * v.m_E[2];
+    return u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
 }
 
 inline Vec3 cross(const Vec3 &u, const Vec3 &v)
 {
-    return Vec3(u.m_E[1] * v.m_E[2] - u.m_E[2] * v.m_E[1],
-                u.m_E[2] * v.m_E[0] - u.m_E[0] * v.m_E[2],
-                u.m_E[0] * v.m_E[1] - u.m_E[1] * v.m_E[0]);
+    return Vec3(u[1] * v[2] - u[2] * v[1],
+                u[2] * v[0] - u[0] * v[2],
+                u[0] * v[1] - u[1] * v[0]);
 }
 
 inline Vec3 unitVector(Vec3 v)

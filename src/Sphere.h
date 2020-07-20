@@ -4,6 +4,7 @@
 #include "Hittable.h"
 #include "Vec3.h"
 #include "Material.h"
+#include "AABB.h"
 
 class Sphere: public Hittable
 {
@@ -13,6 +14,7 @@ public:
         : m_Center(center), m_Radius(radius), m_MatPtr(material) {};
 
     virtual bool hit(const Ray& r, double tMin, double tMax, HitRecord& rec) const override;
+    virtual bool boundingBox(double t0, double t1, AABB& outputBox) const override;
 
     Point3 center() { return m_Center; }
     double radius() { return m_Radius; }

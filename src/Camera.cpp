@@ -1,8 +1,9 @@
 #include "Camera.h"
 
 //Takes Vertical FOV in degrees
-Camera::Camera(Point3 lookFrom, Point3 lookAt, Vec3 viewUp, double vFOV, double aspectRatio, double aperture, double focusDist)
-    : m_Origin(lookFrom), m_LensRadius(aperture / 2)
+Camera::Camera(Point3 lookFrom, Point3 lookAt, Vec3 viewUp, double vFOV, double aspectRatio,
+               double aperture, double focusDist, double t0, double t1)
+    : m_Origin(lookFrom), m_LensRadius(aperture / 2), m_Time0(t0), m_Time1(t1)
 {
     double theta = radians(vFOV);
     double h = tan(theta/2);
@@ -23,5 +24,5 @@ Ray Camera::getRay(double s, double t) const
     Vec3 rd = m_LensRadius * randomInUnitDisc();
     Vec3 offset = m_U * rd.x() + m_V * rd.y();
 
-    return Ray(m_Origin + offset, m_LowerLeftCorner + s*m_Horizontal + t*m_Vertical - m_Origin - offset);
+    return Ray(m_Origin + offset, m_LowerLeftCorner + s*m_Horizontal + t*m_Vertical - m_Origin - offset, randomDouble(m_Time0, m_Time1));
 }

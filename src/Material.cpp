@@ -4,7 +4,7 @@
 bool Lambertian::scatter(const Ray& rIn, const HitRecord& record, Color& attenuation, Ray& scattered) const
 {
     Vec3 scatterDirection = record.normal + randomUnitVector();
-    scattered = Ray(record.p, scatterDirection);
+    scattered = Ray(record.p, scatterDirection, rIn.time());
     attenuation = m_Albedo;
     return true;
 }
@@ -12,7 +12,7 @@ bool Lambertian::scatter(const Ray& rIn, const HitRecord& record, Color& attenua
 bool Metal::scatter(const Ray& rIn, const HitRecord& record, Color& attenuation, Ray& scattered) const
 {
     Vec3 reflected = reflect(unitVector(rIn.direction()), record.normal);
-    scattered = Ray(record.p, reflected + m_Fuzz * randomInUnitSphere());
+    scattered = Ray(record.p, reflected + m_Fuzz * randomInUnitSphere(), rIn.time());
     attenuation = m_Albedo;
     return (dot(scattered.direction(), record.normal) > 0);
 }
@@ -30,7 +30,7 @@ bool Dielectric::scatter(const Ray& rIn, const HitRecord& record, Color& attenua
     if (etaFraction * sinTheta > 1.0) 
     {
         Vec3 reflected = reflect(unitDirection, record.normal);
-        scattered = Ray(record.p, reflected);
+        scattered = Ray(record.p, reflected, rIn.time());
         return true;
     }
 
@@ -38,12 +38,12 @@ bool Dielectric::scatter(const Ray& rIn, const HitRecord& record, Color& attenua
     if (randomDouble() < reflectProb)
     {
         Vec3 reflected = reflect(unitDirection, record.normal);
-        scattered = Ray(record.p, reflected);
+        scattered = Ray(record.p, reflected, rIn.time());
         return true;
     }
 
     Vec3 refracted = refract(unitDirection,  record.normal, etaFraction);
-    scattered = Ray(record.p, refracted);
+    scattered = Ray(record.p, refracted, rIn.time());
     return true;
 }
 
